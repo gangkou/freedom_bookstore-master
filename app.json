@@ -10,7 +10,10 @@
     "pages/new/index",
     "pages/near/index",
     "pages/bookstore/bookstoreadd",
-    "pages/bookstore/index"
+    "pages/bookstore/index",
+    "pages/square/square",
+    "pages/bottom_menu/bottom_menu",
+    "pages/commit/commit"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,7 +41,7 @@
         "text": "书圈",
         "iconPath": "images/category.png",
         "selectedIconPath": "images/category-selected.png",
-        "pagePath": "pages/category/index"
+        "pagePath": "pages/square/square"
       },
       {
         "text": "我的",
