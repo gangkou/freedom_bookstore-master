@@ -5,43 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    firco: "#000000",
-    secco: "#979797",
-    list: [{
-        face_url: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=447979932,3108003765&fm=26&gp=0.jpg",
-        username: "哆啦B梦",
-        send_timestamp: "2019-7-6 14:42",
-        centent: "阅读，是一次心灵的艺术之旅。前辈们留下了大量优秀的作品，通过这些传世之作给我们以启迪，教会我们如何感受世界。那些震撼心灵的好书往往意义深远，让人相逢恨晚。",
-        total_likes: 2,
-      },
-      {
-        face_url: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562409664468&di=da6c500dd77003e15ccf360c979ce2cb&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201408%2F05%2F20140805182358_CckFB.thumb.700_0.png",
-        username: "哆啦C梦",
-        send_timestamp: "2019-8-6 15:14",
-        centent: "阅读，是一次心灵的艺术之旅。",
-        total_likes: 6,
-      },
-      {
-        face_url: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562409732760&di=38f8a56fcbb4d2a6434f0e75df73db7b&imgtype=0&src=http%3A%2F%2Fimg5q.duitang.com%2Fuploads%2Fitem%2F201504%2F02%2F20150402H1413_nRNyd.jpeg",
-        username: "天线宝宝",
-        send_timestamp: "2019-8-8 14:42",
-        centent: "阅读，是一次心灵的艺术之旅。前辈们留下了大量优秀的作品，通过这些传世之作给我们以启迪，教会我们如何感受世界。那些震撼心灵的好书往往意义深远，让人相逢恨晚。",
-        total_likes: 9,
-      },
-      {
-        face_url: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563004541&di=0012d0c0ee52206b1e5dd617467e9f46&imgtype=jpg&er=1&src=http%3A%2F%2Fimg5q.duitang.com%2Fuploads%2Fitem%2F201507%2F08%2F20150708123847_cXsx3.jpeg",
-        username: "皮卡丘",
-        send_timestamp: "2019-1d-6 14:42",
-        centent: "阅读，是一次心灵的艺术之旅。前辈们留下了大量优秀的作品，通过这些传世之作给我们以启迪，教会我们如何感受世界。那些震撼心灵的好书往往意义深远，让人相逢恨晚。",
-        total_likes: 11,
-      }
-    ]
+    loading: true,
+    current: '',
+    current_scroll: '',
+    category: '',
+    moreData: true,//更多数据
+    pageSize: 5,//数量
+    pagination: 0,//页码
+    articles: [],
+    bottomWord:'',
+    loadMore:false,
+    loadMores:false
   },
 
   first_select: function() {
-    // wx.redirectTo({
-    //   url: '../square/square'
-    // })
+    wx.redirectTo({
+      url: '../square/square'
+    })
   },
 
   second_select: function() {
@@ -59,69 +39,70 @@ Page({
   bindTextAreaBlur: function(e){
     console.log(e.detail.value);
     this.data.detail = e.detail.value;
-    
   },
 
 
   onLoad: function(options) {
-    wx.showLoading({
-      title:'加载中'
-    })
     var that = this
-    wx.u.getCategoryList().then(res => {
-      this.setData({
-        cateList: res.result,
-        current: res.result[0].objectId,
-        current_scroll: res.result[0].objectId,
-      })
-      this.getArticleList(res.result[0].objectId);
-
-    })
-
+    this.getArticleList(this.data.pageSize, this.data.pagination);
   },
   
-  getArticleList(category) {
-    wx.u.getArticleByCategory(category).then(res => {
+  getArticleList(pageSize, pagination) {
+    wx.u.getArticleList(pageSize, pagination, '').then(res => {
       console.log(res)
       let data = [];
       res.result.forEach((resEach) => {
+        if(resEach.type==0){
         data.push({
           'objectId': resEach.objectId,
           'title': resEach.title,
           'read_counts': resEach.read_counts,
           'excerpt': resEach.excerpt,
-          'createdAt': resEach.createdAt.slice(0, 10),
+          'content':resEach.mdcontent,
+          'createdAt': resEach.createdAt.slice(0, 16),
           'category': resEach.category,
           'listPic': resEach.listPic,
-          'author': resEach.author
+          'author': resEach.author,
+          'userId':resEach.postuserid
         })
+        console.log(data)
+    
+      }
       })
+      if (this.data.pagination == 0) {
+        this.spinShow()
+      }
       if (data.length) {
+        let articles = this.data.articles;
+        let pagination = this.data.pagination;
+        articles.push.apply(articles, data);
+        pagination = pagination ? pagination + 1 : 1;
+
         this.setData({
-          'articles': data,
-          'nodata':false
+          'articles': articles,
+          'pagination': pagination,
+          'bottomWord': '',
+          'loadMore': false,
         })
       }else{
         this.setData({
-          'articles': data,
-          'nodata': true
+          'moreData':false,
+          'bottomWord': '加载完',
+          'loadMore': false,
         })
-      }
-      
-      this.spinShow();
+      }  
     })
   },
-  handleChangeScroll({
-    detail
-  }) {
-    console.log(detail)
-    this.setData({
-      loading:true,
-      current_scroll: detail.key,
-      pagination: 0
-    });
-    this.getArticleList(detail.key)
+  onReachBottom: function () {
+    if(this.data.moreData){
+      this.setData({
+        'loadMore': true,
+        'bottomWord': '加载中',
+      })
+      this.getArticleList(this.data.pageSize, this.data.pagination);
+    }
   },
+
   spinShow: function() {
     var that = this
     setTimeout(function() {
@@ -139,10 +120,10 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'Mamba 博客',
+      title: '自由书店',
       path: 'pages/index/index',
-      imageUrl: '/images/blog.png'
+      imageUrl: '/images/logo.jpg'
     }
-  },
-  
+  }
 })
+  

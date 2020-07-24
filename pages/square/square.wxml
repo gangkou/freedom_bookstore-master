@@ -1,20 +1,22 @@
 <!--pages/square/square.wxml-->
 <scroll-view class='scbg' scroll-y='true'>
-<block wx:for="{{list}}" wx:for-item="itemName" wx:for-index="id">
+<block wx:for="{{articles}}" wx:for-index="id">
   <view class='box'>
     <view class='firstblock'>
-      <image class='touxiang' src='{{itemName.face_url}}'></image>
+      <image class='touxiang' src='{{item.userId.userPic}}'></image>
       <view class='person'>
         <view class='name'>
-          <text class='showname'>{{itemName.username}}</text>
+          <text class='showname'>{{item.userId.nickName}}</text>
         </view>
         <view class='tel'>
-          <text class='showtime'>{{itemName.send_timestamp}}</text>
+          <text class='showtime'>{{item.createdAt}}</text>
         </view>
       </view>
     </view>
     <view class='secondblock'>
-      <text class='content'>{{itemName.centent}}</text>
+      <text class='content'>{{item.content}} </text>
+       <text>\r\n</text>
+       <image class="postpic" src="{{item.listPic}}"></image>
     </view>
     <view class='thirdblock'>
       <image class='like' src='/images/like.png'></image>

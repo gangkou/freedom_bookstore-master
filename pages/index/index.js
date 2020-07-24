@@ -47,6 +47,7 @@ Page({
       console.log(res)
       let data = [];
       res.result.forEach((resEach) => {
+        if(resEach.type==1){
         data.push({
           'objectId': resEach.objectId,
           'title': resEach.title,
@@ -57,6 +58,7 @@ Page({
           'listPic': resEach.listPic,
           'author': resEach.author
         })
+      }
       })
       if (this.data.pagination == 0) {
         this.spinShow()
@@ -102,9 +104,9 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'Mamba 博客',
+      title: '自由书店',
       path: 'pages/index/index',
-      imageUrl: '/images/blog.png'
+      imageUrl: '/images/logo.jpg'
     }
   }
 })

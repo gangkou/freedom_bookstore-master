@@ -12,9 +12,6 @@
       </view>
       <view class="post-card-content">
         <view style="margin-left: 10px; color: #cccccc;">
-          <!-- <i-tag wx:for="{{item.tags}}" wx:key="tagId" type="border" style="margin-right: 5px;">
-                        {{item.tagName}}
-                    </i-tag> -->
         </view>
         <view class="title">{{item.title}}</view>
         <view class="summary">{{item.excerpt}}</view>

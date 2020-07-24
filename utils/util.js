@@ -46,7 +46,8 @@ const getArticleList = (pageSize, pagination, category)=>{
     }
     query.order("-createdAt")
     query.include('category')
-    query.select("objectId,title,read_counts,excerpt,author,createdAt,category,listPic")
+    query.include('postuserid','_User')
+    query.select("objectId,title,read_counts,excerpt,author,createdAt,category,listPic,type,mdcontent,postuserid")
     query.find().then(res=>{
       resolve({
         'result':res

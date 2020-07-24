@@ -16,14 +16,15 @@ page{
 }
 
 .box{
+  height: auto;
   width: 100%;
   background-color: white;
-  padding-top: 30rpx;
+  padding-top: 100rpx;
   border-bottom: 20rpx solid #EFEFEF;
 }
 
 .firstblock{
-  height: 150rpx;
+  height: auto;
   width: 92%;
   margin-left: 4%;
   margin-right: 4%;
@@ -109,4 +110,9 @@ page{
   margin-left: 20rpx;
   font-size: 30rpx;
   color: #101010;
+}
+
+.postpic{
+   height: 200rpx;
+   width: 200rpx;
 }

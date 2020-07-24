@@ -32,13 +32,13 @@
         "pagePath": "pages/index/index"
       },
       {
-        "text": "附近的店",
+        "text": "看书店",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home-selected.png",
         "pagePath": "pages/near/index"
       },
       {
-        "text": "书圈",
+        "text": "书店圈子",
         "iconPath": "images/category.png",
         "selectedIconPath": "images/category-selected.png",
         "pagePath": "pages/square/square"
