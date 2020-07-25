@@ -442,6 +442,65 @@ const getNewsCount=()=>{
   })
 }
 
+/**
+ * 图片上传
+ */
+const postuploadfile=(temp)=>{
+  return new Promise((resolve, reject) => {
+    if(temp.length>0){
+    wx.showLoading({
+      title: '上传中'
+    })
+          var name=Date.now()+".jpg";//上传的图片的别名，建议可以用日期命名
+          var file;
+          for(let item of temp){
+            file=wx.Bmob.File(name,item);
+          }
+           file.save().then(res => {
+             console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传并更新成功'
+            });
+            resolve({
+              'result':res
+            })
+          console.log(res.length);
+          console.log(res);
+          return res;
+        })
+        }   
+})
+}
+
+/**
+ * 添加贴子
+ */
+const saveposts=(mdcontent,temp)=>{
+return new Promise((resolve,reject)=>{
+  let current = wx.Bmob.User.current();
+  let replyerId = current.objectId
+  const pointer1 = wx.Bmob.Pointer("_User");
+  const poiID1 = pointer1.set(replyerId);
+  const query  = wx.Bmob.Query('articles')
+    var listpic=temp.join(";");
+    console.log(listpic)
+    query.set("mdcontent", mdcontent);
+    query.set("postuserid", poiID1);
+    query.set("listPic", listpic);
+    query.set("type", 0);
+    query.save().then(res=>{
+      resolve({
+        'result': true
+      })
+    }).catch(err=>{
+      resolve({
+        'result': false
+      })
+    })
+})
+}
+
 module.exports = {
   formatTime: formatTime,
   saveUserInfo: saveUserInfo,
@@ -463,5 +522,7 @@ module.exports = {
   sendNew: sendNew,
   getNewsList: getNewsList,
   changeStatus: changeStatus,
-  getNewsCount: getNewsCount
+  getNewsCount: getNewsCount,
+  postuploadfile:postuploadfile,
+  saveposts:saveposts
 }

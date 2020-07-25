@@ -1,6 +1,6 @@
 <!--pages/square/square.wxml-->
 <scroll-view class='scbg' scroll-y='true'>
-<block wx:for="{{articles}}" wx:for-index="id">
+<block wx:for="{{articles}}" wx:key="articlesindex" wx:for-index="id">
   <view class='box'>
     <view class='firstblock'>
       <image class='touxiang' src='{{item.userId.userPic}}'></image>
@@ -16,7 +16,8 @@
     <view class='secondblock'>
       <text class='content'>{{item.content}} </text>
        <text>\r\n</text>
-       <image class="postpic" src="{{item.listPic}}"></image>
+       <!-- <image class="postpic" src="{{item.listPic}}"></image> -->
+       <image wx:for="{{listpic}}"  wx:if='{{customerLevel.value}}' class="postpic" src="{{item}}"></image>
     </view>
     <view class='thirdblock'>
       <image class='like' src='/images/like.png'></image>

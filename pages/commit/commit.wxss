@@ -33,3 +33,12 @@ page{
   color: white;
   font-size: 33rpx;
 }
+
+.photoselect{
+  width:100rpx;
+  height:100rpx;
+}
+.photoselecttemp{
+width:200rpx;
+height:200rpx;
+}

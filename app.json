@@ -15,12 +15,17 @@
     "pages/bottom_menu/bottom_menu",
     "pages/commit/commit"
   ],
+  
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "自由书店",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   },
+  
+    
+
   "tabBar": {
     "selectedColor": "#1296db",
     "color": "#909090",
@@ -61,10 +66,12 @@
     "wx18a2ac992306a5a4",
     "wx7df186fa6b0094c1"
   ],
+  
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
+  
   "sitemapLocation": "sitemap.json"
 }

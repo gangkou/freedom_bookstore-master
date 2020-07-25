@@ -6,40 +6,15 @@ Page({
    */
   data: {
     detail: "",
-  },
-
-  bindTextAreaBlur: function(e) {
-    // console.log(e.detail.value)
-    this.data.detail = e.detail.value
-    // console.log(this.data.detail)
-  },
-
-  send: function(e) {
-    var that=this
-
-    wx.showLoading({
-      title: '加载中',
-    })
-
-    console.log(that.data.detail)
-
-    //与服务器交互
-
-    setTimeout(function () {
-      wx.hideLoading()
-      wx.switchTab({
-        url: '../square/square',
-      })
-    }, 2000)
-
-
+    temp:[],
+    picurl:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    
   },
 
   /**
@@ -89,5 +64,60 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  selectphoto(){
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success : (res)=>{
+        const tempFilePaths = res.tempFilePaths;
+        this.setData({
+         temp: tempFilePaths
+        }); 
+        console.log(this.data.temp)
+      }
+    })
+  },
+
+ send(){
+  console.log(this.data.temp)
+  var temp=this.data.temp
+    //图片上传
+  this.data.picurl=wx.u.postuploadfile(temp);
+  this.data.picurl.then(res=>{
+    var picurllist=[]
+    for(var i=0;i<res.result.length;i++){
+      console.log(res.result[i].url)
+      picurllist[i]=res.result[i].url;
+    }
+
+    console.log(picurllist)
+    //提交文本
+    var mdcontent=this.data.detail
+    wx.u.saveposts(mdcontent,picurllist);
+  })
+
+setTimeout(function(){
+  wx.switchTab({
+    url: '../square/square',
+  success() {
+    var page = getCurrentPages().pop();
+    if (page == undefined || page == null) return; 
+    page.onLoad(); 
+    page.onPullDownRefresh
   }
+})
+},3000)
+
+},
+
+
+/** 
+ * 获取文本信息
+*/
+bindTextAreaBlur: function(e) {
+  this.data.detail = e.detail.value
+  console.log(this.data.detail)
+},
 })

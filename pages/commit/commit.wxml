@@ -1,5 +1,7 @@
 <!--pages/commit/commit.wxml-->
 <view class='textarea'>
    <textarea placeholder="发条动态吧~" placeholder-style="color:#888888; font-size:38rpx;" class='textinput' maxlength='-1' bindinput ="bindTextAreaBlur"></textarea>
+   <image  class="photoselect"   bindtap='selectphoto' src="../../images/photoselect.png"></image>
+    <image  wx:for="{{temp}}" wx:key="tempindex" class="photoselecttemp"    src="{{item}}"></image>
 </view>
 <view id='btn' class='click' bindtap='send'>发送</view>

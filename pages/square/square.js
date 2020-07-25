@@ -19,9 +19,9 @@ Page({
   },
 
   first_select: function() {
-    wx.redirectTo({
-      url: '../square/square'
-    })
+    // wx.redirectTo({
+    //   url: '../square/square'
+    // })
   },
 
   second_select: function() {
@@ -45,6 +45,10 @@ Page({
   onLoad: function(options) {
     var that = this
     this.getArticleList(this.data.pageSize, this.data.pagination);
+    
+    wx.stopPullDownRefresh({
+      success: (res) => {},
+    })
   },
   
   getArticleList(pageSize, pagination) {
@@ -77,12 +81,14 @@ Page({
         let pagination = this.data.pagination;
         articles.push.apply(articles, data);
         pagination = pagination ? pagination + 1 : 1;
-
+        // 等待域名添加cname记录 
+        var listpic=String(this.data.listPic).split(";");  
         this.setData({
           'articles': articles,
           'pagination': pagination,
           'bottomWord': '',
           'loadMore': false,
+          // 'listpic':listpic
         })
       }else{
         this.setData({
@@ -124,6 +130,13 @@ Page({
       path: 'pages/index/index',
       imageUrl: '/images/logo.jpg'
     }
+  },
+  onPullDownRefresh:function(){
+      var that=this;
+      that.setData({
+        currentTab:0
+      })
+      this.onLoad();
   }
 })
   
