@@ -24,6 +24,7 @@ Page({
     var that = this;
     var id = options.id
     var userInfo = wx.getStorageSync('userInfo')
+   
     wx.u.getArticleDetail(id).then(res => {
       console.log(res)
       res.result.createdAt = res.result.createdAt.slice(0, 16)

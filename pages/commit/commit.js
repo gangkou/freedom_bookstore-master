@@ -83,8 +83,11 @@ Page({
  send(){
   console.log(this.data.temp)
   var temp=this.data.temp
+  var userInfo = wx.getStorageSync('userInfo')
+  if(userInfo){
     //图片上传
   this.data.picurl=wx.u.postuploadfile(temp);
+ 
   this.data.picurl.then(res=>{
     var picurllist=[]
     for(var i=0;i<res.result.length;i++){
@@ -96,8 +99,9 @@ Page({
     //提交文本
     var mdcontent=this.data.detail
     wx.u.saveposts(mdcontent,picurllist);
+  
   })
-
+  
 setTimeout(function(){
   wx.switchTab({
     url: '../square/square',
@@ -109,7 +113,19 @@ setTimeout(function(){
   }
 })
 },3000)
-
+  }else{
+    wx.showToast({
+      title: '您还没有登录,登录后解锁新功能吧!',//提示文字
+      duration:2000,//显示时长
+      mask:true,//是否显示透明蒙层，防止触摸穿透，默认： 
+      icon:'none' 
+   })
+    setTimeout(function(){
+      wx.switchTab({
+        url: '../my/index',
+    })
+    },3000)
+  }
 },
 
 

@@ -17,7 +17,7 @@
       <text class='content'>{{item.content}} </text>
        <text>\r\n</text>
        <!-- <image class="postpic" src="{{item.listPic}}"></image> -->
-       <image wx:for="{{listpic}}"  wx:if='{{customerLevel.value}}' class="postpic" src="{{item}}"></image>
+       <image wx:for="{{item.listPic}}"  wx:key="picindex" class="postpic" src="{{item}}"></image>
     </view>
     <view class='thirdblock'>
       <image class='like' src='/images/like.png'></image>

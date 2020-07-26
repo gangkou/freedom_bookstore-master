@@ -65,7 +65,7 @@ Page({
           'content':resEach.mdcontent,
           'createdAt': resEach.createdAt.slice(0, 16),
           'category': resEach.category,
-          'listPic': resEach.listPic,
+          'listPic': resEach.listPic.split(";"),
           'author': resEach.author,
           'userId':resEach.postuserid
         })
@@ -76,20 +76,22 @@ Page({
       if (this.data.pagination == 0) {
         this.spinShow()
       }
+      
       if (data.length) {
         let articles = this.data.articles;
         let pagination = this.data.pagination;
         articles.push.apply(articles, data);
+        console.log(articles[0].listPic)
         pagination = pagination ? pagination + 1 : 1;
-        // 等待域名添加cname记录 
-        var listpic=String(this.data.listPic).split(";");  
+        // 等待域名添加cname记录
+       
         this.setData({
           'articles': articles,
           'pagination': pagination,
           'bottomWord': '',
-          'loadMore': false,
-          // 'listpic':listpic
+          'loadMore': false
         })
+        
       }else{
         this.setData({
           'moreData':false,
