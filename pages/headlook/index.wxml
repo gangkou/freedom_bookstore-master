@@ -1,0 +1,9 @@
+<!--pages/bottom_menu/bottom_menu.wxml-->
+<view class='bottomrow'>
+  <view class='bottomtab' bindtap="first_select">
+    <text class='bottomtabText' style='color:{{firco}}'>榜单</text>
+  </view>
+  <view class='bottomtab' bindtap="second_select">
+    <text class='bottomtabText' style='color:{{secco}}'>附近</text>
+  </view>
+</view>

@@ -1,0 +1,17 @@
+<!--pages/gps/gps.wxml-->
+<view>
+<map id="map"
+longitude="{{mylongitude}}"
+latitude="{{mylatitude}}"
+scale="14"
+markers="{{markers}}"
+bindmarkertap="markertap"
+bindregionchange="regionchange"
+show-location
+style="width: 100%; height: 1000rpx;"
+>
+</map>
+</view>
+<view>
+<button type="primary" bindtap="navigate">导航</button>
+</view>

@@ -56,7 +56,8 @@ Page({
           'createdAt': resEach.createdAt.slice(0, 16),
           'category': resEach.category,
           'listPic': resEach.listPic,
-          'author': resEach.author
+          'author': resEach.author,
+          'link':resEach.link
         })
       }
       })

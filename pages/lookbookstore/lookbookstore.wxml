@@ -1,0 +1,22 @@
+<!--pages/lookbookstore/lookbookstore.wxml-->
+<scroll-view class='scbg' scroll-y='true'>
+<block wx:for="{{bookstore}}" wx:key="bookstoreindex" wx:for-index="id">
+  <navigator url="/pages/bookstoredetail/index?id={{item.objectId}}">
+  <view class='box'>
+    <view class='firstblock'>
+      <view class="top"><text>{{item.top}}</text></view>
+      <view class='person'>
+        <view class='name'>
+          <text class='showname'>{{item.name}}</text>
+        </view>
+        <view class='tel'>
+          <text class='showtime'>地址  :  {{item.introduction[1]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+ </navigator>
+</block>
+</scroll-view>
+
+<include src="/pages/headlook/index.wxml"/>

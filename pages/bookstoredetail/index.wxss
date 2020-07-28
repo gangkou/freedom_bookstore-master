@@ -1,0 +1,56 @@
+/* pages/detail/index.wxss */
+
+.feed-item {
+  padding: 30rpx 30rpx 20rpx;
+  margin: 0rpx 0 0 0;
+  background: #fff;
+}
+
+.title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.listPic {
+  margin-top: 10rpx;
+  text-align: center;
+}
+
+.listPic image {
+  width: 100%;
+}
+
+.tag-body {
+  display: flex;
+}
+
+.postDate {
+  margin-left: 5px;
+}
+
+.author {
+  line-height: 30px;
+  font-size: 10px;
+  color: #738a94;
+  font-family: 微软雅黑;
+}
+
+.content {
+  padding: 10px 10px 20px 10px;
+}
+
+.wxParse-blockquote {
+  font-family: Courier, Calibri, "宋体";
+  background: #FFFFAA;
+  border-left: 3px solid #dbdbdb;
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.gps{
+  width: 30px;
+  height: 30px;
+}

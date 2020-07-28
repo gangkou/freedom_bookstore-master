@@ -15,13 +15,19 @@ Page({
     articles: [],
     bottomWord:'',
     loadMore:false,
-    loadMores:false
+    loadMores:false,
+    firco:"#1ABDE6",
+    secco:"#000000"
   },
 
   first_select: function() {
-    // wx.redirectTo({
-    //   url: '../square/square'
-    // })
+    wx.switchTab({
+      url: '../square/square'
+    })
+    this.setData({
+      firco:"#1ABDE6",
+      secco:"#000000"
+    })
   },
 
   second_select: function() {
@@ -33,6 +39,10 @@ Page({
   third_select: function() {
     wx.switchTab({
       url: '/pages/my/index'
+    })
+    this.setData({
+      firco:"#000000",
+      secco:"#1ABDE6"
     })
   },
 

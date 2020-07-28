@@ -1,0 +1,36 @@
+<!--pages/detail/index.wxml-->
+<view id="body">
+  <view style='background:#eee'>
+    <view style='background:#fff'>
+      <view class='feed-item'>
+        <view class='title'>{{detail.name}}</view>
+        <swiper autoplay="true" interval="2000">
+        <view  wx:for="{{detail.image}}"  wx:key="swiperindex" class='listPic'>
+          <swiper-item>
+            <image mode='widthFix' src="{{item}}" height="300" />
+          </swiper-item>
+        </view>
+        </swiper>
+      </view>
+      <view class="wxParse-blockquote">
+        <view class="wxParse-p">
+          <view class="WxEmojiView wxParse-inline">书店特色 : {{detail.introduction[0]}}</view>
+        </view>
+      </view>
+      <!--内容-->
+      <view class='content'>
+        <view>
+         <text  space="nbsp" style="color:#B3B3B3;font-size:14px">书店地址 :{{detail.introduction[1]}}     </text>
+         <image bindtap="gps" src="{{gps}}" class="gps" >
+         </image>
+         <text>\r\n</text>
+         <text>\r\n</text>
+         <text space="nbsp" style="color:#B3B3B3;font-size:14px">书店电话 :{{detail.introduction[2]}}</text>
+         <text>\r\n</text>
+         <text>\r\n</text>
+         <text space="nbsp" style="color:#B3B3B3;font-size:14px">书店开放时间 :{{detail.introduction[3]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -47,7 +47,7 @@ const getArticleList = (pageSize, pagination, category)=>{
     query.order("-createdAt")
     query.include('category')
     query.include('postuserid','_User')
-    query.select("objectId,title,read_counts,excerpt,author,createdAt,category,listPic,type,mdcontent,postuserid")
+    query.select("objectId,title,read_counts,excerpt,author,createdAt,category,listPic,type,mdcontent,postuserid,link")
     query.find().then(res=>{
       resolve({
         'result':res
@@ -57,6 +57,29 @@ const getArticleList = (pageSize, pagination, category)=>{
     })
   })
 }
+
+/**
+ * 获取书店列表
+ * pageSize:数量
+ * pagination:页码
+ */
+const getbookstoreList = (pageSize, pagination)=>{
+  return new Promise((resolve,reject)=>{
+    const query = wx.Bmob.Query('bookstore')
+    query.limit(pageSize)
+    query.skip(pageSize * pagination)
+    query.order("top")
+    query.select("objectId,name,introduction,top,image,local")
+    query.find().then(res=>{
+      resolve({
+        'result':res
+      })
+    }).catch(err=>{
+      console.log(err)
+    })
+  })
+}
+
 /**
  * 获取文章详情
  * id:文章id
@@ -73,6 +96,43 @@ const getArticleDetail =(id)=>{
     })
   })
 }
+
+/**
+ * 获取书店详情
+ * id:书店id
+ */
+const getbookstoreDetail =(id)=>{
+  return new Promise((resolve,reject)=>{
+    const query = wx.Bmob.Query('bookstore')
+    query.get(id).then(res=>{
+      resolve({
+        'result': res
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+}
+
+/**
+ * 获取附近的书店
+ */
+const near=(longitude,latitude)=>{
+  return new Promise((resolve,reject)=>{
+    const point =wx.Bmob.GeoPoint({longitude,latitude})
+    const query = wx.Bmob.Query("bookstore");
+    query.withinKilometers("local", point, 10); 
+    query.find().then(res => {
+      resolve({
+        'result': res
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  })
+}
+
+
 /**
  * 获取分类列表
  */
@@ -524,5 +584,8 @@ module.exports = {
   changeStatus: changeStatus,
   getNewsCount: getNewsCount,
   postuploadfile:postuploadfile,
-  saveposts:saveposts
+  saveposts:saveposts,
+  getbookstoreList:getbookstoreList,
+  getbookstoreDetail:getbookstoreDetail,
+  near:near
 }

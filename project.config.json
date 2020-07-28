@@ -28,7 +28,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -70,6 +70,14 @@
 					"id": -1,
 					"name": "pages/near/index",
 					"pathName": "pages/near/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/lookbookstore/lookbookstore",
+					"pathName": "pages/lookbookstore/lookbookstore",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -5,30 +5,69 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude:'',
-    latitude:'',
+    markers:[]
   },
   onLoad: function (options) {
-    
-  },
-  onReady:function(){
-    this.getLocation();
-  },
-  onShow:function(){
-    this.getLocation();
-  },
-  getLocation(){
+    var that=this;
     wx.getLocation({
       type: 'gcj02',
-      success: (res)=> {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        this.setData({
-          longitude,
-          latitude
-        })
+      success: (res) => {
+      console.log(res)
+      that.setData({
+      'latitude': res.latitude,
+      'longitude': res.longitude
+      })
+      this.near(res.longitude,res.latitude)
       }
-     })
+      })
   },
+  onReady:function(){
+   
+  },
+  onShow:function(){
+    
+  },
+  onUnload:function(){
+    wx.reLaunch({
+      url: '../lookbookstore/lookbookstore'
+    })
+  },
+  
  
+  near(longitude,latitude){
+   wx.u.near(longitude,latitude).then(res=>{
+       let data=[];
+       res.result.forEach((resEach)=>{
+          data.push({
+            
+                'iconPath': resEach.image.split(";")[0],
+                'id': resEach.objectId,
+                'latitude':Number(resEach.local.latitude),
+                'longitude':Number(resEach.local.longitude),
+                'width': 30,
+                'height': 30
+                
+            
+          })
+          this.setData({
+            detail:res.result
+          })
+       })
+       if(data.length){
+         let markers=this.data.markers;
+         markers.push.apply(markers,data);
+
+         this.setData({
+           'markers':markers
+         })
+         console.log(this.data.markers[0])
+       }
+   })
+  },
+
+  markertap(ev){
+     wx.navigateTo({
+       url: '/pages/bookstoredetail/index?id='+ev.markerId,
+     })
+  }
 })
