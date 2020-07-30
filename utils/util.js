@@ -334,8 +334,12 @@ const likeAction = (id, action) => {
         })
       })
     } else {
-      query.set("user", uid);
-      query.set("article", id);
+      var pointer1 = wx.Bmob.Pointer("_User");
+      var poiID1 = pointer1.set(uid);
+      var pointer2 = wx.Bmob.Pointer("articles");
+      var poiID2 = pointer2.set(id);
+      query.set("user", poiID1);
+      query.set("article", poiID2);
       query.save().then(res => {
         resolve({
           'result': true

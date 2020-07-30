@@ -10,14 +10,22 @@ Page({
     current_scroll: '',
     category: '',
     moreData: true,//更多数据
-    pageSize: 5,//数量
+    pageSize: 1000,//数量
     pagination: 0,//页码
     articles: [],
     bottomWord:'',
     loadMore:false,
     loadMores:false,
-    firco:"#1ABDE6",
-    secco:"#000000"
+    isCollect: false,
+    isLiked: false,
+    userInfo: {},
+    comments: {},
+    comment_count: 0,
+    userId: '',
+    commentContent: '',
+    firco:"#1296db",
+    secco:"#000000",
+    show:1
   },
 
   first_select: function() {
@@ -25,7 +33,7 @@ Page({
       url: '../square/square'
     })
     this.setData({
-      firco:"#1ABDE6",
+      firco:"#1296db",
       secco:"#000000"
     })
   },
@@ -37,13 +45,14 @@ Page({
   },
 
   third_select: function() {
-    wx.switchTab({
-      url: '/pages/my/index'
+    wx.navigateTo({
+      url: '/pages/search/search'
     })
     this.setData({
       firco:"#000000",
-      secco:"#1ABDE6"
+      secco:"#1296db"
     })
+
   },
 
   bindTextAreaBlur: function(e){
@@ -51,14 +60,14 @@ Page({
     this.data.detail = e.detail.value;
   },
 
-
   onLoad: function(options) {
+    if(this.data.show==1){
     var that = this
     this.getArticleList(this.data.pageSize, this.data.pagination);
-    
-    wx.stopPullDownRefresh({
-      success: (res) => {},
-    })
+  }
+  else{
+    this.getArticleList(this.data.pageSize, 0);
+  }
   },
   
   getArticleList(pageSize, pagination) {
@@ -77,7 +86,8 @@ Page({
           'category': resEach.category,
           'listPic': resEach.listPic.split(";"),
           'author': resEach.author,
-          'userId':resEach.postuserid
+          'userId':resEach.postuserid,
+          'liked':resEach.liked
         })
         console.log(data)
     
@@ -99,7 +109,8 @@ Page({
           'articles': articles,
           'pagination': pagination,
           'bottomWord': '',
-          'loadMore': false
+          'loadMore': false,
+          'show':0
         })
         
       }else{
@@ -130,12 +141,7 @@ Page({
       console.log("spinShow");
     }, 1500)
   },
-  detail(e){
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '/pages/detail/index?id='+id,
-    })
-  },
+ 
   onShareAppMessage() {
     return {
       title: '自由书店',
@@ -143,12 +149,29 @@ Page({
       imageUrl: '/images/logo.jpg'
     }
   },
-  onPullDownRefresh:function(){
-      var that=this;
-      that.setData({
-        currentTab:0
-      })
-      this.onLoad();
+
+  onShow(){
+    if(this.data.show!=1){
+    wx.showToast({
+      title: '正在刷新数据...',
+      icon: 'loading',
+      duration: 2000
+    });
+    this.setData({articles:[]});//先清空数据
+    this.onLoad();//再重新加载数据
+    wx:wx.stopPullDownRefresh();//停止刷新操作
   }
+  },
+
+  onPullDownRefresh: function () {
+    wx.showToast({
+      title: '正在刷新数据...',
+      icon: 'loading',
+      duration: 2000
+    });
+    this.setData({articles:[]});//先清空数据
+    this.onLoad();//再重新加载数据
+    wx:wx.stopPullDownRefresh();//停止刷新操作
+  },
 })
   

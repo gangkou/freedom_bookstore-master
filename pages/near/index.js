@@ -45,9 +45,15 @@ Page({
                 'latitude':Number(resEach.local.latitude),
                 'longitude':Number(resEach.local.longitude),
                 'width': 30,
-                'height': 30
-                
-            
+                'height': 30,
+                'label':{
+                    'content':resEach.name,
+                    'color':'black',
+                    'bgColor':'#EEEE11',
+                    'fontSize':'12px',
+                    'padding':'4px',
+                    'borderRadius':'30px'
+                }
           })
           this.setData({
             detail:res.result

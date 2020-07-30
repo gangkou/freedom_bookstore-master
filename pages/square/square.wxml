@@ -1,6 +1,6 @@
 <!--pages/square/square.wxml-->
 <scroll-view class='scbg' scroll-y='true'>
-<block wx:for="{{articles}}" wx:key="articlesindex" wx:for-index="id">
+<block wx:for="{{articles}}" wx:key="id" wx:for-index="id">
   <view class='box'>
     <view class='firstblock'>
       <image class='touxiang' src='{{item.userId.userPic}}'></image>
@@ -18,10 +18,38 @@
        <text>\r\n</text>
        <!-- <image class="postpic" src="{{item.listPic}}"></image> -->
        <image wx:for="{{item.listPic}}"  wx:key="picindex" class="postpic" src="{{item}}"></image>
+       
     </view>
     <view class='thirdblock'>
-      <image class='like' src='/images/like.png'></image>
-      <text class='num'>{{itemName.total_likes}}</text>
+      <view class="iconList">
+        <view class="iconLine">
+          <!-- <view class="icon-type">
+            <view>
+              <image class="img-menu" src="../../images/share.png"></image>
+            </view>
+            <button class="share-button share-button touch-active" openType="share"></button>
+          </view> -->
+          <view bindtap="collection" data-index='{{id}}' data-id='{{item.id}}'  class="icon-type">
+            <view>
+              <image class="img-menu" src="/images/collect_{{item.collected}}.png"></image>
+            </view>
+          </view>
+          <view bindtap="like" data-index='{{id}}' data-id='{{item.id}}' class="icon-type">
+            <!-- <image wx:if ="{{hidden}}" class="img-menu" src="/images/like_false.png"></image> -->
+            <image class="img-menu" src="/images/like_{{item.liked}}.png"></image>
+          </view>
+        </view>
+      </view>
+      <form bindsubmit="formSubmit" report-submit='true'>
+        <view class="comment-respond">
+          <view class="comment-box">
+            <view wx:if="{{item.userId.nickName}}" style='display:flex;width:100%;'>
+              <input bindblur="onReplyBlur" bindconfirm="formSubmit" bindfocus="onRepleyFocus" class="comment-input" confirmType="send" cursorSpacing="10" focus="{{focus}}" maxlength="100" name="inputComment" placeholder="说点什么吧..." type="text" value="{{commentContent}}"></input>
+              <button class="comment-button touch-active" form-type="submit">发送</button>
+            </view>
+          </view>
+        </view>
+      </form>
     </view>
   </view>
 </block>

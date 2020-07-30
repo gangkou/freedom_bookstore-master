@@ -28,7 +28,7 @@ this.setData({
   'gps':"../../images/gpsaft.png"
 })
 wx.redirectTo({
-  url: '/pages/gps/gps?longitude='+this.data.detail.local.longitude+'&latitude='+this.data.detail.local.latitude+'&image='+this.data.detail.image[0],
+  url: '/pages/gps/gps?longitude='+this.data.detail.local.longitude+'&latitude='+this.data.detail.local.latitude+'&image='+this.data.detail.image[0]+'&name='+this.data.detail.name,
 })
 }
 

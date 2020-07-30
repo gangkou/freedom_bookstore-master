@@ -22,9 +22,8 @@
 
 .bottomImg{
   margin-top: 10rpx;
-  width: 130rpx;
-  height: 110rpx;
-  border-radius: 10rpx;
+  width: 95rpx;
+  height: 95rpx;
 }
 
 .bottomtabText{

@@ -28,7 +28,7 @@ page{
   margin-top: 70rpx;
   margin-left: 8%;
   margin-right: 8%;
-  background-color: #F76968;
+  background-color: #1296db;
   text-align: center;
   color: white;
   font-size: 33rpx;

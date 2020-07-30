@@ -9,17 +9,23 @@ Page({
     current_scroll: '',
     category: '',
     moreData: true,//更多数据
-    pageSize: 5,//数量
+    pageSize: 100,//数量
     pagination: 0,//页码
     articles: [],
     bottomWord:'',
     loadMore:false,
-    loadMores:false
+    loadMores:false,
+    show:1
   },
 
   onLoad: function (options) {
+    if(this.data.show==1){
     var that = this
     this.getArticleList(this.data.pageSize, this.data.pagination);
+  }
+    else{
+      this.getArticleList(this.data.pageSize, 0);
+    }
    // if (wx.createInterstitialAd) {
       // 在页面中定义插屏广告
       // let interstitialAd = null
@@ -71,6 +77,7 @@ Page({
         pagination = pagination ? pagination + 1 : 1;
 
         this.setData({
+          'show':0,
           'articles': articles,
           'pagination': pagination,
           'bottomWord': '',
@@ -109,5 +116,34 @@ Page({
       path: 'pages/index/index',
       imageUrl: '/images/logo.jpg'
     }
+  },
+
+  onShow(){
+    if(this.data.show!=1){
+    wx.showToast({
+      title: '正在刷新数据...',
+      icon: 'loading',
+      duration: 2000
+    });
+    this.setData({articles:[]});//先清空数据
+    this.onLoad();//再重新加载数据
+    wx:wx.stopPullDownRefresh();//停止刷新操作
+  }
+  },
+
+  onPullDownRefresh: function () {
+    wx.showToast({
+      title: '正在刷新数据...',
+      icon: 'loading',
+      duration: 2000
+    });
+    this.setData({articles:[]});//先清空数据
+    this.onLoad();//再重新加载数据
+    wx:wx.stopPullDownRefresh();//停止刷新操作
+  },
+
+  linkarticle(e){
+    console.log(e.currentTarget.id)
+    wx.u.addReadCount(e.currentTarget.id)
   }
 })

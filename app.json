@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/category/index",
     "pages/my/index",
     "pages/detail/index",
     "pages/about/index",
@@ -37,14 +36,14 @@
       },
       {
         "text": "看书店",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home-selected.png",
+        "iconPath": "images/look.png",
+        "selectedIconPath": "images/look-selected.png",
         "pagePath": "pages/lookbookstore/lookbookstore"
       },
       {
         "text": "书店圈子",
-        "iconPath": "images/category.png",
-        "selectedIconPath": "images/category-selected.png",
+        "iconPath": "images/posts.png",
+        "selectedIconPath": "images/posts-selected.png",
         "pagePath": "pages/square/square"
       },
       {
@@ -69,6 +68,10 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
   },
   "sitemapLocation": "sitemap.json"
 }

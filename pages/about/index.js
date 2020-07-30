@@ -5,11 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    QQ:"462369233",
-    email: "462369233@qq.com",
-    web:"https://www.mambaxin.com",
-    github:"https://github.com/kesixin",
-    name: 'name1'
+    QQ:"1593554685",
+    email: "1593554685@qq.com",
+    github:"https://github.com/gangkou",
+    name: 'freedom bookstore'
   },
 
   /**

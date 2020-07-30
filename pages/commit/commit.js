@@ -7,7 +7,8 @@ Page({
   data: {
     detail: "",
     temp:[],
-    picurl:''
+    picurl:'',
+  
   },
 
   /**
@@ -86,6 +87,8 @@ Page({
   var userInfo = wx.getStorageSync('userInfo')
   if(userInfo){
     //图片上传
+    console.log(temp.length)
+    if(temp.length>0){
   this.data.picurl=wx.u.postuploadfile(temp);
  
   this.data.picurl.then(res=>{
@@ -94,22 +97,30 @@ Page({
       console.log(res.result[i].url)
       picurllist[i]=res.result[i].url;
     }
-
     console.log(picurllist)
+
     //提交文本
     var mdcontent=this.data.detail
     wx.u.saveposts(mdcontent,picurllist);
-  
   })
-  
+  }else{
+    
+    var picurllist=[]
+    var mdcontent=this.data.detail
+    wx.u.saveposts(mdcontent,picurllist);
+  }
 setTimeout(function(){
   wx.switchTab({
     url: '../square/square',
   success() {
-    var page = getCurrentPages().pop();
-    if (page == undefined || page == null) return; 
-    page.onLoad(); 
-    page.onPullDownRefresh
+   
+    wx.showToast({
+      title: '发布成功!',//提示文字
+      duration:2000,//显示时长
+      mask:true,//是否显示透明蒙层，防止触摸穿透，默认： 
+      icon:'success' 
+   })
+  
   }
 })
 },3000)

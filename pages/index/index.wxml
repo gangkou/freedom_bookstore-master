@@ -25,7 +25,7 @@
         </view>
       </view>
     </navigator>
-     <navigator wx:else url="/pages/oa/oa?link={{item.link}}">
+     <navigator id="{{item.objectId}}" wx:else url="/pages/oa/oa?link={{item.link}}" bindtap="linkarticle">
       <view class="post-card-image-link">
         <image class="img" lazy-load="true" mode="widthFix" src="{{item.listPic}}"></image>
       </view>

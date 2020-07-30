@@ -24,6 +24,7 @@ Page({
     var longitude=options.longitude
     var latitude=options.latitude
     var image=options.image
+    var name=options.name
     this.setData({
       markers: [
         {
@@ -32,8 +33,16 @@ Page({
         latitude:Number(latitude),
         longitude:Number(longitude),
         width: 30,
-        height: 30
+        height: 30,
+        label:{
+          'content':name,
+          'color':'black',
+          'bgColor':'#EEEE11',
+          'fontSize':'12px',
+          'padding':'4px',
+          'borderRadius':'30px'
         }
+        } 
         ],
     })
      console.log(longitude)

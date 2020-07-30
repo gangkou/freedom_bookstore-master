@@ -66,9 +66,9 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'Mamba 博客',
+      title: '自由书店',
       path: 'pages/index/index',
-      imageUrl: '/images/blog.png'
+      imageUrl: '/images/logo.jpg'
     }
   },
   //授权获取用户数据

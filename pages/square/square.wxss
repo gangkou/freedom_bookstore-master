@@ -19,7 +19,7 @@ page{
   height: auto;
   width: 100%;
   background-color: white;
-  padding-top: 100rpx;
+  padding-top: 30rpx;
   border-bottom: 20rpx solid #EFEFEF;
 }
 
@@ -103,6 +103,13 @@ page{
   height: 50rpx;
 }
 
+.collect{
+  margin-top: 20rpx;
+  margin-left: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
 .num{
   height: 50rpx;
   line-height: 50rpx;
@@ -113,6 +120,157 @@ page{
 }
 
 .postpic{
-   height: 200rpx;
-   width: 200rpx;
+   height: 170rpx;
+   width: 220rpx;
+}
+
+/*底部框*/
+
+.comment-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(30, 20, 20, 0.1);
+  z-index: 1;
+}
+
+.comment-box {
+  padding: 16rpx 4rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-box .icon-home {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 6rpx;
+}
+
+.comment-box .icon-add {
+  margin-right: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.comment-area {
+  border: 1px solid #ccc;
+  margin-top: 20rpx;
+  max-width: 800rpx;
+}
+
+.comment-button {
+  width: 140rpx;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 22rpx;
+  border-bottom-left-radius: 0;
+  border-radius: 6px !important;
+  text-align: center;
+  padding: 0 2px !important;
+  font-size: 12px;
+  background-color: #f5f7f7;
+  color: #959595;
+  height: 34px;
+}
+
+.comment-button::after {
+  border: none;
+}
+
+.comment-input {
+  background-color: #f5f7f7;
+  padding: 2px 3px 2px 10px;
+  font-size: 14px;
+  height: 25px;
+  max-height: 25px;
+  min-height: 30px;
+  width: 66%;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.share-button {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
+
+.menu-box {
+  position: relative;
+  height: 80px;
+  padding: 5px 0;
+  box-sizing: border-box;
+  margin-bottom: -80px;
+}
+
+.iconList {
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.iconLine {
+  margin-top: 20rpx;
+}
+
+.iconLine text {
+  font-size: 24rpx;
+  text-align: center;
+  color: #959595;
+}
+
+.iconLine view {
+  text-align: center;
+}
+
+.iconLine .icon-type {
+  width: 20%;
+  position: relative;
+  float: left;
+  text-align: center;
+  padding-left: 50rpx;
+}
+
+.img-menu {
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  text-align: center;
+}
+
+
+.need-login {
+  height: 45px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  font-size: 16px;
+}
+
+.resp-head {
+  color:#aaa;
+  margin:13px 0 13px 10px;
+  font-size:13px;
+  padding-bottom:60px;
+  text-align:center;
+}
+.resp-head1 {
+  color:#ff6a6a;
+  margin:13px 0 13px 10px;
+  font-size:13px;
+}
+.adContainer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }

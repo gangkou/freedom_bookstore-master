@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    firco:"#1ABDE6",
+    firco:"#1296db",
     secco:"#000000",
     loading: true,
     current: '',
@@ -83,7 +83,7 @@ Page({
       url: '../lookbookstore/lookbookstore'
     })
     this.setData({
-      firco:"#1ABDE6",
+      firco:"#1296db",
       secco:"#000000"
     })
   },
@@ -94,7 +94,7 @@ Page({
     })
     this.setData({
       firco:"#000000",
-      secco:"#1ABDE6"
+      secco:"#1296db"
     })
   },
 

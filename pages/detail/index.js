@@ -85,7 +85,7 @@ Page({
     return {
       title: this.data.detail.title,
       path: 'pages/detail/index?id=' + this.data.detail.objectId,
-      imageUrl: '/images/blog.png'
+      imageUrl: '/images/'+this.data.detail.listPic[0]
     }
   },
   showHideMenu: function() {
